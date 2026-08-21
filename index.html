@@ -675,44 +675,67 @@
         </div>
       </div>
 
-      <form class="form" onsubmit="handleSubmit(event)">
-        <div class="form-row">
-          <div class="field">
-            <label for="name">Naam</label>
-            <input type="text" id="name" placeholder="Jouw naam" required>
-          </div>
-          <div class="field">
-            <label for="email">E-mail</label>
-            <input type="email" id="email" placeholder="uwmail@adres.com" required>
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="field">
-            <label for="datum">Datum evenement</label>
-            <input type="date" id="datum">
-          </div>
-          <div class="field">
-            <label for="type">Type evenement</label>
-            <select id="type">
-              <option value="" disabled selected>Selecteer...</option>
-              <option>Bruiloft</option>
-              <option>Verjaardag</option>
-              <option>Bedrijfsevent</option>
-              <option>Feest / party</option>
-              <option>Rooftop / outdoor</option>
-              <option>Anders</option>
-            </select>
-          </div>
-        </div>
-        <div class="field">
-          <label for="bericht">Bericht</label>
-          <textarea id="bericht" placeholder="Vertel iets over het evenement — locatie, aantal gasten, sfeer..."></textarea>
-        </div>
-        <div class="form-submit">
-          <button type="submit" class="btn btn-red">Stuur aanvraag</button>
-          <p class="form-note" id="formNote">Ik reageer binnen 48 uur.</p>
-        </div>
-      </form>
+      <form class="form" id="contactForm">
+
+  <input type="hidden" name="access_key" value="3effbda4-6906-4f1b-a808-fb6c9c11e232">
+  <input type="hidden" name="subject" value="Nieuwe aanvraag via DJ4U website">
+  <input type="hidden" name="from_name" value="DJ4U Website">
+
+  <!-- Anti-spam -->
+  <input type="checkbox" name="botcheck" style="display:none;">
+
+  <div class="form-row">
+    <div class="field">
+      <label for="name">Naam</label>
+      <input type="text" id="name" name="name" placeholder="Jouw naam" required>
+    </div>
+
+    <div class="field">
+      <label for="email">E-mail</label>
+      <input type="email" id="email" name="email" placeholder="uwmail@adres.com" required>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="field">
+      <label for="datum">Datum evenement</label>
+      <input type="date" id="datum" name="datum">
+    </div>
+
+    <div class="field">
+      <label for="type">Type evenement</label>
+      <select id="type" name="type">
+        <option value="" disabled selected>Selecteer...</option>
+        <option>Bruiloft</option>
+        <option>Verjaardag</option>
+        <option>Bedrijfsevent</option>
+        <option>Feest / party</option>
+        <option>Rooftop / outdoor</option>
+        <option>Anders</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="field">
+    <label for="bericht">Bericht</label>
+    <textarea
+      id="bericht"
+      name="bericht"
+      placeholder="Vertel iets over het evenement — locatie, aantal gasten, sfeer..."
+    ></textarea>
+  </div>
+
+  <div class="form-submit">
+    <button type="submit" class="btn btn-red" id="submitButton">
+      Stuur aanvraag
+    </button>
+
+    <p class="form-note" id="formNote">
+      Ik reageer binnen 48 uur.
+    </p>
+  </div>
+
+</form>
     </div>
   </div>
 </section>
