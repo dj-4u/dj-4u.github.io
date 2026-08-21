@@ -820,17 +820,50 @@ window.addEventListener('scroll', () => {
 })();
 
 // ── Form submit ──
-function handleSubmit(e) {
-  e.preventDefault();
-  const note = document.getElementById('formNote');
-  note.textContent = '✓ Aanvraag verzonden — ik neem snel contact op!';
-  note.style.color = '#c8102e';
-  e.target.reset();
-  setTimeout(() => {
-    note.textContent = 'Ik reageer binnen 48 uur.';
-    note.style.color = '';
-  }, 5000);
-}
+const contactForm = document.getElementById("contactForm");
+const formNote = document.getElementById("formNote");
+const submitButton = document.getElementById("submitButton");
+
+contactForm.addEventListener("submit", async function(event) {
+  event.preventDefault();
+
+  submitButton.disabled = true;
+  submitButton.textContent = "Verzenden...";
+  formNote.textContent = "Je aanvraag wordt verzonden...";
+
+  const formData = new FormData(contactForm);
+  const object = Object.fromEntries(formData);
+  const json = JSON.stringify(object);
+
+  try {
+    const response = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: json
+    });
+
+    const result = await response.json();
+
+    if (response.status === 200) {
+      contactForm.reset();
+      formNote.textContent = "Bedankt! Je aanvraag is succesvol verzonden.";
+      submitButton.textContent = "Verzonden ✓";
+    } else {
+      formNote.textContent = "Er ging iets mis. Probeer het opnieuw.";
+      submitButton.textContent = "Stuur aanvraag";
+      submitButton.disabled = false;
+    }
+
+  } catch (error) {
+    console.error(error);
+    formNote.textContent = "Er ging iets mis. Controleer je internetverbinding en probeer opnieuw.";
+    submitButton.textContent = "Stuur aanvraag";
+    submitButton.disabled = false;
+  }
+});
 </script>
 </body>
 </html>
